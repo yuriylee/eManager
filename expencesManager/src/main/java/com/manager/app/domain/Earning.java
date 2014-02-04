@@ -1,6 +1,7 @@
 package com.manager.app.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "earnings")
@@ -10,23 +11,30 @@ public class Earning {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String name;
+
     @Column
     private Double amount;
-    @ManyToOne(fetch=FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "earning_date")
+    private Date earningDate;
 
     public Earning() {
 
     }
 
-    public Earning(String name, User user, Double amount, Long id) {
+    public Earning(String name, User user, Double amount, Long id, Date earningDate) {
         this.name = name;
         this.user = user;
         this.amount = amount;
         this.id = id;
+        this.earningDate = earningDate;
     }
 
     public Long getId() {
@@ -61,6 +69,14 @@ public class Earning {
         this.user = user;
     }
 
+    public Date getEarningDate() {
+        return earningDate;
+    }
+
+    public void setEarningDate(Date earningDate) {
+        this.earningDate = earningDate;
+    }
+
     @Override
     public String toString() {
         return "Earning{" +
@@ -68,6 +84,7 @@ public class Earning {
                 ", name='" + name + '\'' +
                 ", amount=" + amount +
                 ", user=" + user +
+                ", earningDate=" + earningDate +
                 '}';
     }
 }

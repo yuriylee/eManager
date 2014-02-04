@@ -18,11 +18,15 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private List<Earning> earningList;
+    public User() {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-    private List<Expence> expenceList;
+    }
+
+    public User(Long id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
@@ -46,21 +50,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Earning> getEarningList() {
-        return earningList;
-    }
-
-    public void setEarningList(List<Earning> earningList) {
-        this.earningList = earningList;
-    }
-
-    public List<Expence> getExpenceList() {
-        return expenceList;
-    }
-
-    public void setExpenceList(List<Expence> expenceList) {
-        this.expenceList = expenceList;
     }
 }
